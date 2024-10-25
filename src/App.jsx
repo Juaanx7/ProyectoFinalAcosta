@@ -1,6 +1,9 @@
 import NavBar from "./components/NavBar";
 import ItemListContainer from "./components/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Asegúrate de importar el bundle para incluir Popper.js
+
 import {
   BrowserRouter,
   Routes,
