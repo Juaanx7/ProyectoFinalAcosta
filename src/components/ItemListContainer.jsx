@@ -2,40 +2,40 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import ItemList from './ItemList';
 
+const API_BASE_URL = 'https://dummyjson.com/products';
+const MAIN_CATEGORIES = ['smartphones', 'laptops', 'mobile-accessories'];
+
 function ItemListContainer() {
     const [items, setItems] = useState([]);
     const { id } = useParams();
 
-    useEffect(() => {
-        const url = 'https://dummyjson.com/products';
-        const urlCategory = `https://dummyjson.com/products/category/${id}`;
-        
-        //Utilice un array para poder mostrar solo las 3 categorias que queria en la vista principal:
-        const categories = ['smartphones', 'laptops', 'mobile-accessories'];
+    // Obtener productos de una categoria especifica
+    const fetchCategoryItems = async (categoryId) => {
+        const response = await fetch(`${API_BASE_URL}/category/${categoryId}`);
+        const data = await response.json();
+        return data.products;
+    };
 
-        if (!id) {
-            // Hago un fetch a las tres categorías
-            Promise.all(
-                categories.map(category => 
-                    fetch(`https://dummyjson.com/products/category/${category}`)
-                        .then(res => res.json())
-                )
-            ).then(responses => {
-                // Combino todos los productos de las tres categorías
-                const allProducts = responses.flatMap(response => response.products);
-                setItems(allProducts);
-            });
-        } else {
-            // Si se pasa el ID de categoría, hago fetch solo de esa categoría:
-            fetch(urlCategory)
-                .then(res => res.json())
-                .then(res => setItems(res.products));
-        }
+    // Obtener productos de las categorias principales
+    const fetchMainCategoriesItems = async () => {
+        const responses = await Promise.all(
+            MAIN_CATEGORIES.map(fetchCategoryItems)
+        );
+        return responses.flat();
+    };
+
+    useEffect(() => {
+        const fetchItems = async () => {
+            const items = id 
+                ? await fetchCategoryItems(id)
+                : await fetchMainCategoriesItems();
+            setItems(items);
+        };
+        fetchItems();
     }, [id]);
 
-    return (
-        <ItemList items={items} />
-    );
+    return <ItemList items={items} />;
 }
 
 export default ItemListContainer;
+

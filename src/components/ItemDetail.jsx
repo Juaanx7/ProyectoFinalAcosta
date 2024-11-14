@@ -1,19 +1,30 @@
-import { Card } from 'react-bootstrap';
+import { useState } from 'react';
 import ItemCount from './ItemCount';
 
-function ItemDetail({ detail }) {
-  return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <Card className="my-3" style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={detail?.images[0]} alt="imagen de producto" />
-        <Card.Body>
-          <Card.Title>{detail?.title}</Card.Title>
-          <Card.Text>{detail?.description}</Card.Text>
-          <ItemCount/>
-        </Card.Body>
-      </Card>
-    </div>
-  );
+function ItemDetail({ product }) {
+    const [isAdded, setIsAdded] = useState(false); // Estado para controlar si el producto fue agregado al carrito
+
+    const handleAddToCart = (count) => {
+        // Lógica para agregar al carrito
+        console.log(`Producto agregado: ${product.name}, Cantidad: ${count}`);
+        
+        // Cambia el estado a true para ocultar ItemCount
+        setIsAdded(true);
+    };
+
+    return (
+        <div>
+            <h2>{product.name}</h2>
+            <p>Precio: ${product.price}</p>
+            <p>Stock disponible: {product.stock}</p>
+
+            {/* Solo muestra ItemCount si el producto no fue agregado al carrito */}
+            {!isAdded && <ItemCount stock={product.stock} onAdd={handleAddToCart} />}
+            
+            {/* Aquí podrías mostrar el carrito o una notificación si el producto ya fue agregado */}
+            {isAdded && <p>Producto agregado al carrito</p>}
+        </div>
+    );
 }
 
 export default ItemDetail;
