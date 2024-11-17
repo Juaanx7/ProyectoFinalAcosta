@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { Button, Card } from 'react-bootstrap'; // Importamos los componentes de Bootstrap
+import { Button, Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../styles/main.scss';
 
