@@ -68,4 +68,25 @@
   .card-inner {
     background-color: $background-internal-card;
   }
-  
+  /* Estilos personalizados para las cads de confirmacion de compra */
+.card-custom {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.card-title-custom {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.card-text-custom {
+  font-size: 1.2rem;
+  color: #6c757d;
+  margin-bottom: 2rem;
+}
