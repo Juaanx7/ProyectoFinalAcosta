@@ -24,7 +24,7 @@ const NavBar = () => {
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link to="/category/smartphones" className="nav-link">
-              Celulares
+                Celulares
               </Link>
             </li>
             <li className="nav-item">
@@ -37,8 +37,10 @@ const NavBar = () => {
                 Accesorios
               </Link>
             </li>
+            <li className="nav-item">
+              <CartWidget />
+            </li>
           </ul>
-          <CartWidget />
         </div>
       </div>
     </nav>
@@ -46,4 +48,3 @@ const NavBar = () => {
 };
 
 export default NavBar;
-

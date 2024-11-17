@@ -1,41 +1,45 @@
 import { useEffect, useState } from 'react';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../firebase/firebaseConfig';
 import { useParams } from 'react-router-dom';
 import ItemList from './ItemList';
 
-const API_BASE_URL = 'https://dummyjson.com/products';
-const MAIN_CATEGORIES = ['smartphones', 'laptops', 'mobile-accessories'];
-
 function ItemListContainer() {
-    const [items, setItems] = useState([]);
     const { id } = useParams();
-
-    // Obtener productos de una categoria especifica
-    const fetchCategoryItems = async (categoryId) => {
-        const response = await fetch(`${API_BASE_URL}/category/${categoryId}`);
-        const data = await response.json();
-        return data.products;
-    };
-
-    // Obtener productos de las categorias principales
-    const fetchMainCategoriesItems = async () => {
-        const responses = await Promise.all(
-            MAIN_CATEGORIES.map(fetchCategoryItems)
-        );
-        return responses.flat();
-    };
+    const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchItems = async () => {
-            const items = id 
-                ? await fetchCategoryItems(id)
-                : await fetchMainCategoriesItems();
-            setItems(items);
+        const fetchProducts = async () => {
+            try {
+                // Filtra por categoría si existe 'id' en la URL
+                const productsRef = collection(db, 'products');
+                const q = id ? query(productsRef, where('category', '==', id)) : productsRef;
+
+                const querySnapshot = await getDocs(q);
+                const products = querySnapshot.docs.map(doc => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+
+                setItems(products); 
+            } catch (error) {
+                console.error("Error al obtener productos:", error);
+            } finally {
+                setLoading(false);
+            }
         };
-        fetchItems();
+
+        fetchProducts();
     }, [id]);
 
-    return <ItemList items={items} />;
+    if (loading) {
+        return <p>Cargando productos...</p>;
+    }
+
+    return (
+        <ItemList items={items} />
+    );
 }
 
 export default ItemListContainer;
-

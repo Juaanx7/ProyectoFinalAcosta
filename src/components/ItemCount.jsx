@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { useState } from "react";
+import { Button, Col, Row } from "react-bootstrap";
+import "../styles/_itemCount.scss";
 
 function ItemCount({ stock, initial = 1, onAdd }) {
     const [count, setCount] = useState(initial);
@@ -17,39 +18,36 @@ function ItemCount({ stock, initial = 1, onAdd }) {
     };
 
     const handleAddToCart = () => {
-        onAdd(count); // Llama a la función de agregar con la cantidad seleccionada
+        onAdd(count);
     };
 
     return (
-        <div className="text-center my-3">
+        <div className="item-count text-center my-3">
             <h4>
                 Cantidad: <span className="badge bg-secondary">{count}</span>
             </h4>
             <Row className="justify-content-center">
                 <Col xs="auto">
                     <Button
-                        variant="outline-primary"
-                        className="mx-1"
+                        className="mx-1 primary-btn"
                         onClick={handleDecrement}
-                        disabled={count <= 1} // Deshabilita si está en el mínimo
+                        disabled={count <= 1}
                     >
                         -
                     </Button>
                     <Button
-                        variant="outline-primary"
-                        className="mx-1"
+                        className="mx-1 primary-btn"
                         onClick={handleIncrement}
-                        disabled={count >= stock} // Deshabilita si está en el máximo
+                        disabled={count >= stock}
                     >
                         +
                     </Button>
                 </Col>
             </Row>
-            <Button 
-                variant="success" 
-                className="mt-2" 
+            <Button
+                className="mt-2 primary-btn"
                 onClick={handleAddToCart}
-                disabled={stock === 0} // Deshabilita si no hay stock
+                disabled={stock === 0}
             >
                 Agregar al carrito
             </Button>

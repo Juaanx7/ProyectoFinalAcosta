@@ -1,0 +1,39 @@
+@import './variables';
+
+.primary-btn {
+    background-color: $primary-color;
+    color: $text-color;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      color: $background-color;
+    }
+  
+    &:disabled {
+      background-color: lighten($primary-color, 20%);
+      color: $text-color;
+      cursor: not-allowed;
+    }
+  }
+  
+  .btn-checkout {
+    background-color: $background-color-button;
+    color: $background-color;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: darken($background-color-button, 10%);
+    }
+  }
+  
+  

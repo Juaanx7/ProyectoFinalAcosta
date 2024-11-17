@@ -1,25 +1,31 @@
 import NavBar from "./components/NavBar";
 import ItemListContainer from "./components/ItemListContainer";
 import ItemDetailContainer from "./components/ItemDetailContainer";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js'; // Asegúrate de importar el bundle para incluir Popper.js
+import Cart from "./components/Cart";
+import CartWidget from "./components/CartWidget";
+import OrderConfirmation from "./components/OrderConfirmation";
 
-import {
-  BrowserRouter,
-  Routes,
-  Route
-} from "react-router-dom"
+import { CartProvider } from "./context/CartContext";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-  <BrowserRouter>
-      <NavBar/>
-      <Routes>
-        <Route path="/" element={<ItemListContainer />} />
-        <Route path="/category/:id" element={<ItemListContainer />} />
-        <Route path="/item/:id" element={<ItemDetailContainer />} />
-      </Routes>
-  </BrowserRouter>
+    <CartProvider>
+      <BrowserRouter>
+        <NavBar />
+        <CartWidget />
+        <Routes>
+          <Route path="/" element={<ItemListContainer />} />
+          <Route path="/category/:id" element={<ItemListContainer />} />
+          <Route path="/item/:id" element={<ItemDetailContainer />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/order/:id" element={<OrderConfirmation />} />
+        </Routes>
+      </BrowserRouter>
+    </CartProvider>
   );
 }
 
