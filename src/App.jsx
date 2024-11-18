@@ -4,7 +4,6 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import Cart from "./components/Cart";
 import CartWidget from "./components/CartWidget";
 import OrderConfirmation from "./components/OrderConfirmation";
-
 import { CartProvider } from "./context/CartContext";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';

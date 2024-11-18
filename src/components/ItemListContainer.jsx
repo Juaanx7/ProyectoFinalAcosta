@@ -3,6 +3,8 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../firebase/firebaseConfig';
 import { useParams } from 'react-router-dom';
 import ItemList from './ItemList';
+import Lottie from 'lottie-react';
+import loadingAnimation from '../assets/loader.json';
 
 function ItemListContainer() {
     const { id } = useParams();
@@ -34,7 +36,15 @@ function ItemListContainer() {
     }, [id]);
 
     if (loading) {
-        return <p>Cargando productos...</p>;
+        return <div className="loading-container">
+                    <Lottie 
+                    animationData={loadingAnimation} 
+                    loop={true} 
+                    autoplay={true} 
+                    speed={2} 
+                    style={{ width: 350, height: 350 }} 
+                    />
+                </div>
     }
 
     return (
