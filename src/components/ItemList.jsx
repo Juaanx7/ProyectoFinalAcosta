@@ -11,14 +11,19 @@ function ItemList({ items }) {
                 {items.map(item => (
                     <div key={item.id}>
                         <Link to={`/item/${item.id}`} style={{ textDecoration: 'none' }}>
-                            <Card className="h-100">
-                                <Card.Img variant="top" src={item.thumbnail} alt={`Imagen de ${item.title}`} />
-                                <Card.Body>
-                                    <Card.Title>{item.title}</Card.Title>
-                                    <Card.Text>{item.description}</Card.Text>
-                                    <Card.Text>Precio: ${item.price}</Card.Text>
-                                    <Card.Text>Stock disponible: {item.stock}</Card.Text>
-                                    <Button variant="primary" className="primary-btn">Ver detalles</Button>
+                            <Card className="product-card h-100">
+                                <Card.Img
+                                    variant="top"
+                                    src={item.thumbnail}
+                                    alt={`Imagen de ${item.title}`}
+                                    className="product-image"
+                                />
+                                <Card.Body className="product-content">
+                                    <Card.Title className="product-title">{item.title}</Card.Title>
+                                    <Card.Text className="product-description">{item.description}</Card.Text>
+                                    <Card.Text className="product-price">${item.price}</Card.Text>
+                                    <Card.Text className="product-stock">Stock: {item.stock}</Card.Text>
+                                    <Button variant="primary" className="product-btn">Ver detalles</Button>
                                 </Card.Body>
                             </Card>
                         </Link>

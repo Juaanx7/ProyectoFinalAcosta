@@ -1,74 +1,75 @@
-.card {
-    background-color: $background-color-cards;
-    border: 1px solid lighten($text-color, 60%);
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 100%;
-    margin: 1rem auto;
-  
-    &:hover {
-      transform: translateY(-10px);
-      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    }
-  
-    &-image {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-  
-    &-content {
-      padding: 1rem;
-      text-align: center;
-      margin-bottom: 2rem;
-      width: 100%;
-  
-      &-title {
-        font-size: 1.25rem;
-        font-weight: bold;
-        color: $text-color;
-        margin-bottom: 0.5rem;
-      }
-  
-      &-description {
-        font-size: 0.9rem;
-        color: lighten($text-color, 30%);
-        margin-bottom: 1rem;
-      }
-  
-      &-price {
-        font-size: 1.1rem;
-        color: $primary-color;
-        font-weight: bold;
-        margin-bottom: 1rem;
-      }
-  
-      &-btn {
-        background-color: $primary-color;
-        color: $text-color;
-        border: none;
-        padding: 10px 15px;
-        font-size: 1rem;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-  
-        &:hover {
-          background-color: darken($primary-color, 10%);
-        }
-      }
-      &-footer {
-        margin-top: 2rem;
-        text-align: center;
-      }
-    }
+@use "sass:color";
+@use './variables' as *;
+
+.product-card {
+  background-color: #fff;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
   }
-  .card-inner {
-    background-color: $background-internal-card;
+}
+
+.product-image {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eee;
+}
+
+.product-content {
+  padding: 1.2rem;
+  text-align: center;
+}
+
+.product-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 0.5rem;
+}
+
+.product-description {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+  min-height: 48px; // para mantener altura uniforme
+}
+
+.product-price {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #0071e3; // azul tipo Apple
+  margin-bottom: 0.5rem;
+}
+
+.product-stock {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.product-btn {
+  background-color: #0071e3;
+  border: none;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: color.adjust($primary-color, $lightness: -10%);
   }
-  /* Estilos personalizados para las cads de confirmacion de compra */
+}
+
+  /* Estilos personalizados para las cards de confirmacion de compra */
 .card-custom {
   background-color: #fff;
   padding: 2rem;

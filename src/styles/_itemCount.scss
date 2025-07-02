@@ -1,4 +1,4 @@
-@import './variables';
+@use './variables' as *;
 .item-count {
     text-align: center;
     margin: 1rem 0;

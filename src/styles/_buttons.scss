@@ -1,4 +1,5 @@
-@import './variables';
+@use './variables' as *;
+@use 'sass:color';
 
 .primary-btn {
     background-color: $primary-color;
@@ -10,12 +11,12 @@
     transition: background-color 0.3s ease;
   
     &:hover {
-      background-color: darken($primary-color, 10%);
+      background-color: color.adjust($primary-color, $lightness: -10%);
       color: $background-color;
     }
   
     &:disabled {
-      background-color: lighten($primary-color, 20%);
+      background-color: color.adjust($primary-color, $lightness: 20%);
       color: $text-color;
       cursor: not-allowed;
     }
@@ -32,7 +33,7 @@
     transition: background-color 0.3s ease;
   
     &:hover {
-      background-color: darken($background-color-button, 10%);
+      background-color: color.adjust($background-color-button, $lightness: -10%);
     }
   }
   
