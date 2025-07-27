@@ -1,0 +1,31 @@
+@use "sass:color";
+@use './variables' as *;
+
+.modal-content {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.modal .modal-header {
+  background-color: #f1f1f1;
+  border-bottom: none;
+  padding: 1.2rem 1.5rem;
+}
+
+.modal .modal-title {
+  color: #0071e3;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.modal .modal-body {
+  font-size: 1rem;
+  color: #333;
+  padding: 1.5rem;
+}
+
+.modal .modal-footer {
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+}

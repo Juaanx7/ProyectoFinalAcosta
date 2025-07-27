@@ -3,6 +3,8 @@
 @use './buttons';
 @use './cards';
 @use './itemCount';
+@use './modals';
+@use './navbar';
 
 body {
   background-color: $background-color;
@@ -31,4 +33,3 @@ a {
   align-items: center;
   height: 100vh;
 }
-

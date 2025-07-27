@@ -1,0 +1,22 @@
+@use './variables' as *;
+@use 'sass:color';
+
+.navbar .nav-link:hover,
+.navbar .navbar-brand:hover {
+  background-color: transparent !important;
+  text-decoration: underline; // opcional
+}
+
+.navbar-brand {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: $primary-color;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: color.adjust($primary-color, $lightness: -10%);
+    text-decoration: none;
+  }
+}

@@ -3,10 +3,10 @@
 
 .primary-btn {
     background-color: $primary-color;
-    color: $text-color;
+    color: #fff;
     border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
   
@@ -23,7 +23,7 @@
   }
   
   .btn-checkout {
-    background-color: $background-color-button;
+    background-color: $primary-color;
     color: $background-color;
     padding: 10px 20px;
     font-size: 1rem;
@@ -33,7 +33,7 @@
     transition: background-color 0.3s ease;
   
     &:hover {
-      background-color: color.adjust($background-color-button, $lightness: -10%);
+      background-color: color.adjust($primary-color, $lightness: -10%);
     }
   }
   

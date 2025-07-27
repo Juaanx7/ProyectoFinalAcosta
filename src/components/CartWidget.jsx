@@ -6,9 +6,7 @@ function CartWidget() {
 
   return (
     <div className="nav-item">
-      <Link to="/cart" className="nav-link">
-        <span>Carrito ({calculateTotalItems()})</span>
-      </Link>
+      
     </div>
   );
 }

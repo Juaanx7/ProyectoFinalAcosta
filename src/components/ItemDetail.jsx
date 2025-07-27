@@ -7,13 +7,17 @@ import ItemCount from './ItemCount';
 import Card from 'react-bootstrap/Card';
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 function ItemDetail() {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [isAdded, setIsAdded] = useState(false);
-
     const { addToCart } = useCart();
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -37,8 +41,8 @@ function ItemDetail() {
     const handleAddToCart = (count) => {
         addToCart({ ...product, quantity: count });
         setIsAdded(true);
+        handleShow();
 
-        // Mostrar notificación con Toastify
         Toastify({
             text: "Producto agregado al carrito",
             duration: 3000,
@@ -50,24 +54,48 @@ function ItemDetail() {
         }).showToast();
     };
 
+
     if (!product) {
         return <p>Cargando...</p>;
     }
 
     return (
-        <div className="d-flex justify-content-center mt-5">
-            <Card style={{ width: '30rem' }} className="shadow-sm">
-                <Card.Img variant="top" src={product.thumbnail} alt={`Imagen de ${product.title}`} />
-                <Card.Body>
-                    <Card.Title>{product.title}</Card.Title>
-                    <Card.Text>{product.description}</Card.Text>
-                    <Card.Text>Precio: ${product.price}</Card.Text>
-                    <Card.Text>Stock disponible: {product.stock}</Card.Text>
+        <div className="product-detail-container">
+            <Card className="product-detail-card shadow-sm">
+            <div className="product-detail-image-wrapper">
+                <Card.Img
+                variant="top"
+                src={product.thumbnail}
+                alt={`Imagen de ${product.title}`}
+                className="product-detail-image"
+                />
+            </div>
+            <Card.Body className="product-detail-body">
+                <Card.Title className="product-detail-title">{product.title}</Card.Title>
+                <Card.Text className="product-detail-description">{product.description}</Card.Text>
+                <Card.Text className="product-detail-price">${product.price}</Card.Text>
+                <Card.Text className="product-detail-stock">Stock disponible: {product.stock}</Card.Text>
 
-                    {!isAdded && <ItemCount stock={product.stock} onAdd={handleAddToCart} />}
-                    {isAdded && <p>Producto agregado al carrito</p>}
-                </Card.Body>
+                {!isAdded && <ItemCount stock={product.stock} onAdd={handleAddToCart} />}
+                {isAdded && <p className="product-detail-confirm">Producto agregado al carrito</p>}
+            </Card.Body>
             </Card>
+            <Modal show={showModal} onHide={handleClose} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>¡Producto agregado!</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>{product.title} fue agregado correctamente al carrito.</p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                    Seguir comprando
+                    </Button>
+                    <Button variant="primary" href="/cart">
+                    Ir al carrito
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 }
