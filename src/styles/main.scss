@@ -22,7 +22,7 @@ a {
   color: $primary-color;
   text-decoration: none;
 
-  &:hover {
+  &:not(.navbar-brand):hover {
     background-color: color.adjust($primary-color, $lightness: -10%);
   }
 }
