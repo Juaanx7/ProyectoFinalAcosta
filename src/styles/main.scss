@@ -5,6 +5,8 @@
 @use './itemCount';
 @use './modals';
 @use './navbar';
+@use './Cart';
+
 
 body {
   background-color: $background-color;

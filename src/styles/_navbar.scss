@@ -36,3 +36,27 @@
     }
   }
 }
+//Estilos para el icono del carrito
+.cart-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: $primary-color;
+
+  &:hover {
+    background-color: transparent;
+    color: color.adjust($primary-color, $lightness: -10%);
+  }
+
+  .cart-count {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-weight: bold;
+  }
+}

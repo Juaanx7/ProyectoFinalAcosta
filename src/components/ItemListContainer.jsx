@@ -5,6 +5,9 @@ import { useParams } from 'react-router-dom';
 import ItemList from './ItemList';
 import Lottie from 'lottie-react';
 import loadingAnimation from '../assets/loader.json';
+import CartSummary from './CartSummary';
+import { Container } from 'react-bootstrap';
+import '../styles/Cart.scss';
 
 function ItemListContainer() {
     const { id } = useParams();
@@ -14,7 +17,6 @@ function ItemListContainer() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                // Filtra por categoría si existe 'id' en la URL
                 const productsRef = collection(db, 'products');
                 const q = id ? query(productsRef, where('category', '==', id)) : productsRef;
 
@@ -36,19 +38,28 @@ function ItemListContainer() {
     }, [id]);
 
     if (loading) {
-        return <div className="loading-container">
-                    <Lottie 
+        return (
+            <div className="loading-container">
+                <Lottie 
                     animationData={loadingAnimation} 
                     loop={true} 
                     autoplay={true} 
                     speed={2} 
                     style={{ width: 350, height: 350 }} 
-                    />
-                </div>
+                />
+            </div>
+        );
     }
 
     return (
-        <ItemList items={items} />
+        <>
+            <Container className="mt-4">
+                <ItemList items={items} />
+            </Container>
+            <div className="cart-summary-fixed d-none d-lg-block">
+                <CartSummary />
+            </div>
+        </>
     );
 }
 

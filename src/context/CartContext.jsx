@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const CartContext = createContext();
 
@@ -14,12 +14,12 @@ export const CartProvider = ({ children }) => {
       let updatedCart;
       if (existingProductIndex !== -1) {
         updatedCart = [...prevCart];
-        updatedCart[existingProductIndex].quantity += 1;
+        updatedCart[existingProductIndex].quantity += product.quantity;
       } else {
-        updatedCart = [...prevCart, { ...product, quantity: 1 }];
+        updatedCart = [...prevCart, product];
       }
-      console.log("Carrito actualizado:", updatedCart);
 
+      console.log("Carrito actualizado:", updatedCart);
       return updatedCart;
     });
   };
@@ -37,12 +37,19 @@ export const CartProvider = ({ children }) => {
   };
 
   const clearCart = () => {
-    setCart([]); 
+    setCart([]);
   };
 
   return (
-    <CartContext.Provider 
-      value={{ cart, addToCart, removeFromCart, calculateTotal, calculateTotalItems, clearCart }}
+    <CartContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        calculateTotal,
+        calculateTotalItems,
+        clearCart,
+      }}
     >
       {children}
     </CartContext.Provider>

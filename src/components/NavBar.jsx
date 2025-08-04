@@ -1,8 +1,13 @@
-import CartWidget from "./CartWidget.jsx";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { useContext } from "react";
+import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const NavBar = () => {
+  const { calculateTotalItems } = useCart();
+  const totalQuantity = calculateTotalItems();
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -37,8 +42,13 @@ const NavBar = () => {
                 Accesorios
               </Link>
             </li>
-            <li className="nav-item">
-              <CartWidget />
+            <li className="nav-item position-relative">
+              <Link to="/cart" className="nav-link cart-icon">
+                <FaShoppingCart size={22} />
+                {totalQuantity > 0 && (
+                  <span className="cart-count">{totalQuantity}</span>
+                )}
+              </Link>
             </li>
           </ul>
         </div>

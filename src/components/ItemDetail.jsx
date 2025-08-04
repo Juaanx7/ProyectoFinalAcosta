@@ -9,6 +9,7 @@ import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import { Link } from 'react-router-dom';
 
 function ItemDetail() {
     const { id } = useParams();
@@ -91,9 +92,10 @@ function ItemDetail() {
                     <Button variant="secondary" onClick={handleClose}>
                     Seguir comprando
                     </Button>
-                    <Button variant="primary" href="/cart">
-                    Ir al carrito
-                    </Button>
+                    <Link to="/cart" className="btn btn-primary">
+                        Ir al carrito
+                    </Link>
+
                 </Modal.Footer>
             </Modal>
         </div>
