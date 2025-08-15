@@ -8,7 +8,7 @@ function CartSummary() {
 
   return (
     <Card className="cart-summary p-3">
-      <h5>Resumen del carrito</h5>
+      <h5>Tu carrito</h5>
       <p>Productos: {calculateTotalItems()}</p>
       <p>Total: ${calculateTotal()}</p>
       <Link to="/cart" className="cart-btn-link">
